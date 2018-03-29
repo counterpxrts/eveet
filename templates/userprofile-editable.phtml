@@ -1,0 +1,26 @@
+<?php 
+include_once("navbar.phtml"); 
+?>
+<link rel="stylesheet" type="text/css" href="/assets/userprofile.css">
+<form action="/action/edituser/<?= $username ?>" method="POST">
+<div class="header">
+  <h2><?= $fullname ?></h2>
+</div>
+
+<div class="row">
+  <div class="column side" style="background-color:#aaa;">
+    <div class="flex-vertical-container">
+        <div class="flex-horizontal-container-centered">
+            <div class="container"></div>
+            <div id = 'username'> <p> @<?= $username ?></p></div>
+        </div>
+        <div><textarea name="description"><?= $description ?></textarea></div>
+        <button type="submit">Save</button>
+    </div>
+  </div>
+  <div class="column middle" style="background-color:#bbb;">What's going on?</div>
+  
+</div>
+</form>
+
+</div>

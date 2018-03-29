@@ -1,0 +1,32 @@
+<?php include_once("navbar.phtml") ?>
+
+<form action="/action/login" method="POST">
+
+  <?php
+    if(isset($_SESSION["ERROR"])) {
+        if($_SESSION["ERROR"] == "incorrect_password") {
+            echo "<p>You used an incorrect password.</p>";
+        } else {
+            echo "<p>Everything is working so far, thanks for using our service.</p>";
+        }
+    }
+
+    unset($_SESSION["ERROR"]); 
+  ?>
+
+  <div class="container">
+    <label for="uname"><b> Username</b></label>
+    <input type="text" placeholder="Enter your Username" name="uname" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter your Password" name="psw" required>
+
+    <button type="submit">Login</button>
+
+  </div>
+
+  <div class="container" style="background-color:#a4a4a4">
+    
+  </div>
+</form>
+</body>

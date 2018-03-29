@@ -1,0 +1,52 @@
+<?php 
+include_once("navbar.phtml"); 
+?>
+
+<form action="/action/signup" method="post">
+  <div class="container">
+    <h1>Sign Up to Eveet</h1>
+    <?php
+    if(isset($_SESSION["ERROR"])) {
+        if($_SESSION["ERROR"] == "not_eqn") {
+            echo "<p>Everything is working so far, thanks for using our service.</p>";
+        } else if($_SESSION["ERROR"] == "user_exists") {
+            echo "<p>This user is already registered, please log in</p>";
+        } else if($_SESSION["ERROR"] == "db_error") {
+            echo "<p>DB ERROR</p>";
+        } else {
+            echo "<p>Everything is working so far, thanks for using our service.</p>";
+        }
+    }
+
+    unset($_SESSION["ERROR"]); 
+    ?>
+
+    <p>Please fill in the following to sign up and start seeing fellow concertgoers...</p>
+    <hr>
+
+    <label for="fullname"><b>Full Name</b></label>
+    <input type="text" placeholder="Enter your Full Name" name="fullname" required>
+
+    <label for="username"><b>Username</b></label>
+    <input type="text" placeholder="Enter your Username" name="username" required>
+
+    <label for="userdob"><b>Date of Birth (DD/MM/YY)</b></label>
+    <input type="text" placeholder="Enter your Date of Birth" name="userdob" required>
+
+    <label for="location"><b>Location you want Events shown for</b></label>
+    <input type="text" placeholder="Please enter the Event Location" name="location" required>
+
+    <label for="email"><b>Email</b></label>
+    <input type="text" placeholder="Enter your Email" name="email" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter your Password" name="psw" required>
+
+    <label for="psw-repeat"><b>Repeat Password</b></label>
+    <input type="password" placeholder="Repeat your Password" name="psw-repeat" required>
+
+    <div class="clearfix">
+      <button type="submit" class="signupbtn">Sign Up</button>
+    </div>
+  </div>
+</form>

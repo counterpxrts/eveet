@@ -1,6 +1,6 @@
 
 /* Full-width input fields */
-  input[type=text], input[type=password] {
+  input[type=text], input[type=password], input[type=date] {
   width: 100%;
   padding: 15px;
 

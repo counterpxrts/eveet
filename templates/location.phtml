@@ -1,0 +1,28 @@
+<?php
+  include_once("navbar.phtml");
+
+  $db = new PDO(
+      'mysql:host=127.0.0.1;dbname=eveet;charset=utf8mb4',
+      'eveet',
+      'KGqWXTJqHlCGigw6',
+      array(PDO::ATTR_EMULATE_PREPARES => false, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
+  );
+
+  if(!$location) $location = $_SESSION["location"];
+
+  $fetchEvents = $db->prepare("SELECT * FROM Event WHERE EventLocation = :location");
+  $fetchEvents->bindParam(":location", $location);
+  $fetchEvents->execute();
+  $events = $fetchEvents->fetchAll();
+  foreach($events as $event) {
+?>
+<div class="event">
+  <?=json_encode($event);?>
+</div>
+<div class="container"></div>
+<div id = 'Eventname'> <p> @<?= $EventName ?></p></div>
+<div
+
+<?
+  }
+?>

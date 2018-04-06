@@ -1,5 +1,5 @@
-<?php 
-include_once("navbar.phtml"); 
+<?php
+include_once("navbar.phtml");
 ?>
 <link rel="stylesheet" type="text/css" href="/assets/userprofile.css">
 <div class="header">
@@ -10,13 +10,74 @@ include_once("navbar.phtml");
   <div class="column side" style="background-color:#aaa;">
     <div class="flex-vertical-container">
         <div class="flex-horizontal-container-centered">
-            <div class="container"></div>
+            <div class="container image"><div class="edit"></div></div>
+            <style>
+              .container.image {
+                background-image: url(<?=$image;?>);
+                overflow: hidden;
+                position: relative;
+              }
+              .container.image .edit {
+                width: 100%;
+                height: 100%;
+                background-color: rgba(180,180,180,.8);
+                display: block;
+                position: absolute;
+                left: 0; top: 0;
+                opacity: 0;
+                transition: all .2s linear;
+              }
+              .container.image:hover .edit {
+                opacity: 1;
+              }
+              .container.image .edit::before {
+                content: 'Edit';
+                width: 100%;
+                margin-top: -5px;
+                text-align: center;
+                position: absolute;
+                left: 0;
+                top: 50%;
+                font-weight: bold;
+                cursor: pointer;
+              }
+            </style>
+            <script>
+              let image = document.querySelector('.container.image .edit');
+              image.addEventListener('click', e=>{
+                let image = prompt("Enter URL for new Image", "<?=$image;?>");
+                if(image) {
+                  let body = new FormData();
+                  body.append('image', image);
+                  fetch('/action/updateImage', {
+                    method: 'POST',
+                    credentials: 'include',
+                    body
+                  }).then(d=>d.json()).then(d=>{
+                    if(d.error) throw new Error(d.error);
+                    location.reload();
+                  }).catch(e=>alert(e));
+                }
+              });
+            </script>
             <div id = 'username'> <p> @<?= $username ?></p></div>
         </div>
         <div><p><?=$description?></p><?php if($isOwner) echo '<a href="/userprofile/', $username, '/edit">Edit</a>';?></div>
     </div>
   </div>
-  <div class="column middle" style="background-color:#bbb;">What's going on?</div>
+  <div class="column middle" style="background-color:#bbb;">
+
+    What's going on?
+    <p>Interested in (<?=count($interested);?>):</p>
+    <? foreach($interested as $event) { ?>
+      <p><i><?=json_encode($event);?></i></p>
+    <? } ?>
+    <p>Attending (<?=count($attending);?>):</p>
+    <? foreach($attending as $event) { ?>
+      <p><i><?=json_encode($event);?></i></p>
+    <? } ?>
+
+  </div>
  <!-- <div class="column side" style="background-color:#ccc;">Column</div> !-->
 </div>
 

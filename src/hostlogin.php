@@ -5,7 +5,7 @@ $username = $data['uname'];
 $password = $data['psw'];
 
 $db = new PDO(
-    'mysql:host=localhost;dbname=eveet;charset=utf8mb4',
+    'mysql:host=127.0.0.1;dbname=eveet;charset=utf8mb4',
     'eveet',
     'KGqWXTJqHlCGigw6',
     array(PDO::ATTR_EMULATE_PREPARES => false, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
@@ -20,8 +20,10 @@ $row = $fetchUserStatement->fetch();
 $storedPasswordHash = $row['HostUserPassword'];
 
 if(password_verify($password, $storedPasswordHash)) { //built in PHP function to compare password to password_hashed version
-    $_SESSION["hostusername"] = $username;
-    header("Location: /hostuserprofile/{$username}");
+    $_SESSION["username"] = $username;
+    $_SESSION["id"] = $row["HostUserID"];
+    $_SESSION["is_host"] = true;
+    header("Location: /");
     exit();
 } else {
     $_SESSION["ERROR"] = "incorrect_password";

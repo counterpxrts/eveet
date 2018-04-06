@@ -1,0 +1,54 @@
+<?php
+include_once("navbar.phtml");
+$db = new PDO(
+    'mysql:host=127.0.0.1;dbname=eveet;charset=utf8mb4',
+    'eveet',
+    'KGqWXTJqHlCGigw6',
+    array(PDO::ATTR_EMULATE_PREPARES => false, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
+);
+
+?>
+
+
+<? if(!$attending) { ?>
+  <? if(!$interested) { ?>
+    <a href="/event/<?=$id;?>/interested">Interested</a>
+  <? } else { ?>
+    <a href="/event/<?=$id;?>/interested/undo">Not Interested</a>
+  <? } ?>
+  <a href="/event/<?=$id;?>/attending">Attending</a>
+<? } else { ?>
+  <a href="/event/<?=$id;?>/attending/undo">Not Attending</a>
+<? } ?>
+<h1><?=$title;?></h1>
+<h2><?=$location;?></h2>
+<h3><?=$date;?><?=$host;?></h3>
+<form action="/event/<?=$id;?>/comment" method="POST">
+  <div class="comments">
+    <div class="content">
+      <? foreach($comments as $comment) {
+        if($comment["CommentByHost"]) {
+          $getUser = $db->prepare("SELECT HostUserName FROM Host WHERE HostUserID = ?");
+        } else {
+          $getUser = $db->prepare("SELECT UserName FROM User WHERE UserID = ?");
+        }
+        $getUser->execute(array(
+          $comment["CommentUserID"]
+        ));
+        $user = $getUser->fetch();
+        $username = $user[0];
+        ?><div class="comment">
+          <div class="user">
+            <span class="UserName"><?=$username;?></span>
+            <i><?=$comment["TimeStamp"];?></i>
+          </div>
+          <p><?=$comment["CommentText"];?></p>
+        </div><?
+      }?>
+    </div>
+    <div class="create">
+      <input type="text" name="text" placeholder="Comment..." />
+      <input type="submit" value="Send" />
+    </div>
+  </div>
+</form>

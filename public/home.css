@@ -1,0 +1,15 @@
+
+
+  /* Clear floats */
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+#EventName{
+    border-style: solid;
+    border-width: 5px;
+    border-color: #f28f00;
+
+}

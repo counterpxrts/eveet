@@ -2,22 +2,37 @@ body {
     background-color: #a4a4a4;
     font-family: Avant Garde, Avantgarde, Century Gothic, CenturyGothic, AppleGothic, sans-serif;
 }
+table, tr, th, tbody {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  border-spacing: 0;
+}
 
 .icon-bar {
     width: 100%; /* Full-width */
     background-color: #494949; /* Dark-grey background */
-    overflow: auto; /* Overflow  */
+    overflow: visible; /* Overflow  */
     position: top left;
     position: relative;
+    height: 68px;
+}
 
+.icon-bar .searchBox {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  display: none;
+  height: 60px;
+  background-color: #bbb;
 }
 
 .icon-bar a {
     float: left; /* links displayed next to each other */
     text-align: center; /* Center is aligned the text */
-    width: 20%; /* Equal width (5 icons with 20% width each = 100%) */
+    width: 20%; /* Equal width (icons with 20% width each = 100%) */
     padding: 12px 0; /* Top and bottom padding */
-    transition: all 0.3s ease; /* Add transition for hover effects */ 
+    transition: all 0.3s ease; /* Add transition for hover effects */
 
     color: #000000; /* Black text color on primary colour */
     font-size: 36px; /* font size */
@@ -40,47 +55,41 @@ body {
     right: 0px;
     transition: all 0.3s ease;
     padding: 5px 0;
-    
+
+}
+body, div {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
 }
 body, html {
     height: 100%;
 } /* Sets height to 100% in html*/
 
+
+.hero {
+  height: 100vh;
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  overflow: hidden;
+}
     /* The header image */
 .hero-image {
     /* The image used */
     background-image: url("https://images.pexels.com/photos/518389/pexels-photo-518389.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb");
 
-    /* Set a specific height */
-    height: 100%;
-     /* Create the parallax scrolling effect */
-     background-attachment: fixed;
-     background-position: center;
-     background-repeat: no-repeat;
-     background-size: cover;
-    
 }
-
-
 
 .hero-image2 {
     background-image: url("https://images.pexels.com/photos/354304/pexels-photo-354304.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb");
-    height: 100%;
-    /* Create the parallax scrolling effect */
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
 
 }
 .hero-image3 {
     background-image: url("https://images.pexels.com/photos/106400/pexels-photo-106400.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb");
-    height: 100%;
-    /* Create the parallax scrolling effect */
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
 
 }
     /* Place text in the middle of the image */
@@ -133,7 +142,7 @@ body, html {
     position: relative;
     top: 50%;
     left: 7%
-    
+
  }
 
  h3{
@@ -144,7 +153,7 @@ body, html {
     position: relative;
     top: 50%;
     left: 37%
-    
+
 
 
  }

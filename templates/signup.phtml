@@ -1,5 +1,5 @@
-<?php 
-include_once("navbar.phtml"); 
+<?php
+include_once("navbar.phtml");
 ?>
 
 <form action="/action/signup" method="post">
@@ -18,7 +18,7 @@ include_once("navbar.phtml");
         }
     }
 
-    unset($_SESSION["ERROR"]); 
+    unset($_SESSION["ERROR"]);
     ?>
 
     <p>Please fill in the following to sign up and start seeing fellow concertgoers...</p>
@@ -31,7 +31,7 @@ include_once("navbar.phtml");
     <input type="text" placeholder="Enter your Username" name="username" required>
 
     <label for="userdob"><b>Date of Birth (DD/MM/YY)</b></label>
-    <input type="text" placeholder="Enter your Date of Birth" name="userdob" required>
+    <input type="date" placeholder="Enter your Date of Birth" name="userdob" required>
 
     <label for="location"><b>Location you want Events shown for</b></label>
     <input type="text" placeholder="Please enter the Event Location" name="location" required>

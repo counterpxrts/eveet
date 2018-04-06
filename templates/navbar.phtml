@@ -7,27 +7,56 @@
 
 </head>
 <body>
-    
 
 
 
 
+
+<? if($_SESSION["username"]) { ?>
  <table style="width:100%">
   <tr>
-    <th><!-- Adds the icon library to be used for the icon navbar from font awesome --> 
+    <th><!-- Adds the icon library to be used for the icon navbar from font awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-
 <div class="icon-bar">
-  <a class="active" href="#"><i class="fa fa-home"></i></a> <!--adds the home icon to the bar-->
-  <a href="/userprofile/<?= $_SESSION["username"] ?>"><i class="fa fa-user"></i></a> <!--adds the user profile icon to the bar-->
-  <a href="#"><i class="fa fa-search"></i></a><!--adds the search for event icon to the bar-->
-  <a href="/logout"><i class="fa fa-sign-out"></i></a> <!--adds the sign out icon to the bar-->
+  <a class="active" href="/"><i class="fa fa-home"></i></a> <!--adds the home icon to the bar-->
+  <? if($_SESSION["username"] && !$_SESSION["is_host"]) { ?><a href="/userprofile/<?= $_SESSION["username"] ?>"><i class="fa fa-user"></i></a><? } ?> <!--adds the user profile icon to the bar if logged in -->
+  <a href="#search" class="searchBtn"><i class="fa fa-search"></i></a><!--adds the search for event icon to the bar-->
+  <? if($_SESSION["username"]) { ?><a href="/logout"><i class="fa fa-sign-out"></i></a><? } ?> <!--adds the sign out icon to the bar if logged in -->
+<? if($_SESSION["is_host"]) { ?><a href ="/action/createEvent"><i class="fa fa-plus"></i></i></a><? } ?> <!--adds the add event icon to the bar-->
+
+  <div class="searchBox">
+    <form class="searchForm">
+      <input type="text" name="search" />
+    </form>
+  </div>
 </div> </th>
+
+
     <th style="width:246px;"> <div id="logo"> <!--Adds the eveet logo to the top right corner -->
     <img src="https://i.imgur.com/fLe7f2x.png" class="image"/> <!--links to the logo -->
 
-</table> 
-    
+</table>
+<? } ?>
+<script>
+  let btn = document.querySelector('.searchBtn');
+  let bar = document.querySelector('.searchBox');
+  let form = bar.querySelector('form');
+  let field = form.querySelector('input');
+
+  form.addEventListener('submit', e=>{
+    e.preventDefault();
+    location.href = `/location/${field.value}`;
+  });
+  let visible = false;
+  if(btn) btn.addEventListener('click', e=>{
+    e.preventDefault();
+    if(bar) {
+      visible = !visible;
+      bar.style.display = visible?'block':'none';
+    }
+  });
+</script>
+
 </div>
 </th>

@@ -5,7 +5,7 @@ $description = $data['description'];
 $username = $args['username']; //get username from URL
 
 $db = new PDO(
-    'mysql:host=localhost;dbname=eveet;charset=utf8mb4',
+    'mysql:host=127.0.0.1;dbname=eveet;charset=utf8mb4',
     'eveet',
     'KGqWXTJqHlCGigw6',
     array(PDO::ATTR_EMULATE_PREPARES => false, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)

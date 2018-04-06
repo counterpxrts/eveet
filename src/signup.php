@@ -14,15 +14,15 @@ if($data["psw"] != $data["psw-repeat"]) {
     $location = $data["location"];
     $fullname = $data["fullname"];
 
-    $db = new PDO('mysql:host=localhost;dbname=eveet;charset=utf8mb4', 'eveet', 'KGqWXTJqHlCGigw6', array(PDO::ATTR_EMULATE_PREPARES => false, 
+    $db = new PDO('mysql:host=127.0.0.1;dbname=eveet;charset=utf8mb4', 'eveet', 'KGqWXTJqHlCGigw6', array(PDO::ATTR_EMULATE_PREPARES => false, 
                                                                                                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-    
+
     try {
-        $stmt = $db->query("SELECT * FROM User WHERE UserEmail = '$email'"); 
+        $stmt = $db->query("SELECT * FROM User WHERE UserEmail = '$email'");
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         if($row["UserID"] == "") {
             //query to add inserted information into DB
-            $statement = $db->prepare("INSERT INTO User(UserFullName, UserLocation, UserDOB, UserEmail, UserPassword, UserName) 
+            $statement = $db->prepare("INSERT INTO User(UserFullName, UserLocation, UserDOB, UserEmail, UserPassword, UserName)
             VALUES('$fullname','$location','$dob','$email','$psw','$username')");
 
             $statement->execute() ;
@@ -45,4 +45,3 @@ if($data["psw"] != $data["psw-repeat"]) {
     //header("Location: /signup");
     exit();
 }
-

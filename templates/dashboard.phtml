@@ -1,0 +1,27 @@
+<?php
+  $db = new PDO(
+      'mysql:host=127.0.0.1;dbname=eveet;charset=utf8mb4',
+      'eveet',
+      'KGqWXTJqHlCGigw6',
+      array(PDO::ATTR_EMULATE_PREPARES => false, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
+  );
+  $getEvents = $db->prepare("SELECT * FROM Event WHERE HostID = ?");
+  $getEvents->execute(array(
+    $_SESSION["id"]
+  ));
+  $events = $getEvents->fetchAll();
+
+  foreach($events as $event) {
+    $getInterested = $db->prepare("SELECT * FROM Interested WHERE EventID = ?");
+    $getInterested->execute(array( $event["EventID"] ));
+    $interested = count($getInterested->fetchAll());
+
+    $getAttending = $db->prepare("SELECT * FROM Attending WHERE EventID = ?");
+    $getAttending->execute(array( $event["EventID"] ));
+    $attending = count($getAttending->fetchAll());
+    ?>
+    Interested: <?=$interested;?>
+    Attending: <?=$attending;?>
+    <?=json_encode($event);?>
+    <?
+  }
